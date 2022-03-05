@@ -22,7 +22,7 @@ ft = Font( name="Times New Roman", size=9, bold=True)
 Fill = PatternFill(start_color='000000',end_color='000000',fill_type='solid')
 border_style = Side(border_style="thin", color="000000")
 border = Border(top=None, left=border_style, right=border_style, bottom=border_style)
-
+name_array = ['TTSH','TMR','aaa']
 for month in range(starting_month,starting_month+months+1):
     wb.create_sheet(datetime.date(1900, month, 1).strftime('%b'))
     
@@ -59,6 +59,17 @@ for sheet in wb.worksheets:
         for cell in row:
             cell.font = Font(color="FFFFFF",name="Times New Roman", size=9, bold=True)
             cell.fill = Fill
+    #create colums for every name in the name_array in column C
+    for col in sheet.iter_cols( min_col =3, max_col = 3, max_row=len(name_array)+4):
+        #print(col)
+        for name in range(len(name_array)):
+            for cell in col:
+                r =  name+3
+                print(cell.column_letter+str(r))
+                sheet[cell.column_letter+str(r)]= name_array[name]
+
+
+    
             
     
     
